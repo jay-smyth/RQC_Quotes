@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="newjob.tradeForTask"
+    android:background="@color/cardview_light_background">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <TextView
+                style="@style/titleText"
+                android:text="@string/task_by_t_frag_title" />
+                <View
+                    android:background="@color/black"
+                    style="@style/underView"/>
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="180dp"
+                    android:layout_margin="@dimen/text_margin"
+                    android:id="@+id/tradeListview"/>
+            </LinearLayout>
+        </RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tradeFrag"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

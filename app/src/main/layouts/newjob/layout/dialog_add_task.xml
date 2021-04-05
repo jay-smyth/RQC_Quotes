@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+    <TextView
+        style="@style/textBox"
+        android:layout_margin="20dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/add_task_ex"/>
+    <EditText
+        android:id="@+id/taskNameEditText"
+        style="@style/editTextBox"
+        android:hint="@string/add_task_name"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/taskCostEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="0"
+        android:textSize="25sp"
+        android:inputType="numberDecimal"/>
+    <ListView
+        android:id="@+id/tradeItems"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    </LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterUser">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:id="@+id/tableRow"
+                    android:layout_width="413dp"
+                    android:layout_height="105dp"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="158dp"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/logo"
+                        app:srcCompat="@drawable/rqc_logo_1" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="219dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/plsRegister" />
+                </TableRow>
+
+                <EditText
+                    android:id="@+id/etPersonName"
+                    android:hint="@string/nameCreation"
+                    android:inputType="textPersonName"
+                    style="@style/editTextBox"/>
+
+                <EditText
+                    android:id="@+id/etEmailAddress"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    style="@style/editTextBox"/>
+                <TextView
+                    android:id="@+id/emailWarning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/errorMsg"/>
+
+                <EditText
+                    android:id="@+id/etPassword1"
+                    android:inputType="textPassword"
+                    android:hint="@string/enterPassword"
+                    style="@style/editTextBox"/>
+                <TextView
+                    android:id="@+id/passOneWarning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/errorMsg"/>
+
+                <EditText
+                    android:id="@+id/etPassword2"
+                    android:inputType="textPassword"
+                    android:hint="@string/confirmPassword"
+                    style="@style/editTextBox"/>
+                <TextView
+                    android:id="@+id/passTwoWarning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/errorMsg"/>
+
+                <Button
+                    android:id="@+id/registerBtn"
+                    style="@style/MyBtn"
+                    android:text="@string/register"
+                    app:backgroundTint="@null" />
+
+                <Button
+                    android:id="@+id/canBtn"
+                    style="@style/MyBtn"
+                    android:text="@string/cancel"
+                    app:backgroundTint="@null" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

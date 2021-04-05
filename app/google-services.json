@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "863689943444",
+    "project_id": "rqc-quotes",
+    "storage_bucket": "rqc-quotes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863689943444:android:afded368af6d0dca1ec781",
+        "android_client_info": {
+          "package_name": "com.jaysmythweb.jaysm.rqcquotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863689943444-jogfhide07vide71hb1mcp3eblp38r0d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jaysmythweb.jaysm.rqcquotes",
+            "certificate_hash": "f92332351bb05fe1908730e6a14ef20c49ec976b"
+          }
+        },
+        {
+          "client_id": "863689943444-375dqvm75inkti9uvptkfseu0qo8nuc8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAoXBVJ4NRn_9L_jhIBgpB1q9Ie1w3-GM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863689943444-375dqvm75inkti9uvptkfseu0qo8nuc8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

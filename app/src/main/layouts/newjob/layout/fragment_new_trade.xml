@@ -1,0 +1,65 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="newjob.newTradeFragment"
+    android:orientation="vertical"
+    android:background="@color/cardview_light_background">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            style="@style/titleText"
+            android:text="@string/add_trade_name"/>
+        <View
+            android:background="@color/black"
+            style="@style/underView"/>
+        <EditText
+            android:id="@+id/newTradeEditText"
+            style="@style/editTextBox"
+            android:inputType="text"/>
+
+        <TextView
+            style="@style/titleText"
+            android:text="@string/add_first_task"/>
+        <View
+            android:background="@color/black"
+            style="@style/underView"
+            android:layout_marginBottom="15dp"/>
+        <Button
+            android:id="@+id/addTaskBtn"
+            android:text="@string/addTaskBtn"
+            style="@style/MyBtn"
+            app:backgroundTint="@null"/>
+
+        <ListView
+            android:id="@+id/newTasksListView"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/cancelBtn"
+            style="@style/MyBtn"
+            android:text="@string/cancel"
+            android:layout_weight="1"
+            app:backgroundTint="@null"/>
+        <Button
+            android:id="@+id/saveBtn"
+            style="@style/MyBtn"
+            android:text="@string/save"
+            android:layout_weight="1"
+            app:backgroundTint="@null"/>
+        </LinearLayout>
+    </LinearLayout>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

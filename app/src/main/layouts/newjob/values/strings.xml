@@ -1,0 +1,22 @@
+<resources>
+    <string name="test_text">Hello world, Test String!</string>
+    <string name="select_trade">Select a trade!</string>
+    <string name="assign_trade">Select a trade to assign the task!</string>
+    <string name="create_new_trade">Create a new trade</string>
+    <string name="create_task">Create a new task</string>
+    <string name="delete_task">Delete task from trades category</string>
+    <string name="task_by_t_frag_title">Select a trade task or add a new one.</string>
+    <string name="title_to_quote">Title your quote "&#xD;(If you leave it blank we'll use the address)"</string>
+    <string name="add_room">Add room</string>
+    <string name="add_task">Add Task</string>
+    <string name="add_task_ex">Add a task name</string>
+    <string name="add_task_name">Task name</string>
+    <string name="task_title_text">Create a new task for this trade or select an existing one below</string>
+    <string name="edit_task">Edit the task price below</string>
+    <string name="add_trade_name">Add a new trade title</string>
+    <string name="tradeTitle_err">Trade title required</string>
+    <string name="add_first_task">Add first trade task</string>
+    <string name="add_task_cost">Add task cost</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+</resources>

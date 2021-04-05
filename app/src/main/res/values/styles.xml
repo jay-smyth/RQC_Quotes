@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyBtn" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/txtGrey</item><!--As of android sdk 4.1.1 error in styles and themes-->
+        <item name="android:fontFamily">Roboto</item><!--As of android sdk 4.1.1 error in styles and themes-->
+        <item name="android:backgroundTint">@color/btn1</item>
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+    <style name="editTextBox">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">15dp</item>
+    </style>
+    <style name="textBox">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="titleText">
+        <item name="android:layout_marginTop">25dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/txtBlack</item>
+    </style>
+    <style name="errorMsg">
+        <item name="android:textColor">@color/errRed</item>
+        <item name="android:layout_margin">15dp</item>
+    </style>
+    <style name="imgHold">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">15dp</item>
+    </style>
+    <style name="underView">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+    <style name="sunkList">
+        <item name="backgroundColor">@color/greyed</item>
+    </style>
+</resources>

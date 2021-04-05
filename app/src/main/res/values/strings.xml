@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">RQC Quotes</string>
+    <string name="logo">RQC Quotes Logo is text</string>
+    <string name="title_activity_register_user">RegisterUser</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="logInTxt">Log In!</string>
+    <string name="logOrReg">Please log in or register</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Ok</string>
+    <string name="save">Save</string>
+    <string name="error">Error</string>
+    <string name="password">Password</string>
+    <string name="passError">Password must contain capital and non capital letters, at least one number and a special character!</string>
+    <string name="passMatchError">Passwords must match!</string>
+    <string name="enterPassword">Enter Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="email">Email</string>
+    <string name="emailError">Invalid Email address!</string>
+    <string name="register">Register</string>
+    <string name="plsRegister">Please register below!</string>
+    <string name="nameCreation">Create Username</string>
+    <string name="newJob">Create New Job</string>
+    <string name="Jobs">Jobs!</string>
+    <string name="viewJobDrafts">View Drafts</string>
+    <string name="viewQuotes">View Quotes</string>
+    <string name="contacts">Contacts</string>
+    <string name="tlCreateJobTitle">Create new Jobs and quotes</string>
+    <string name="tlViewOldJob">View your active and old jobs</string>
+    <string name="tlViewContacts">View your contacts list</string>
+    <string name="addTaskBtn">Add Task +</string>
+    <string name="addTaskByTradeBtn">Add By Trade +</string>
+    <string name="taskHeader">Add new tasks to the room</string>
+    <string name="taskSubHeader2">Tasks created for this room:</string>
+    <string name="list">
+        <li>Electrician</li>
+        <li>Joiner</li>
+        <li>Plumber</li>
+        <li>Painter/Decorator</li>
+    </string>
+</resources>
