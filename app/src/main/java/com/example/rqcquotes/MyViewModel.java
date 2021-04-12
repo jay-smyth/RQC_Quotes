@@ -53,8 +53,4 @@ public class MyViewModel extends ViewModel {
         });
     }
 
-    private void loadTask(){
-        
-    }
-
 }

@@ -60,6 +60,7 @@ public class RegisterUser extends AppCompatActivity {
 
         //Lambda expression for onClickListener
         regBtn.setOnClickListener(view -> {
+
             String txtName = name.getText().toString();
             String txtEmail = email.getText().toString();
             String txtPass_1 = passOne.getText().toString();
@@ -84,8 +85,9 @@ public class RegisterUser extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
                                 //Sign in for the win!!
-                                Log.d(TAG, "Created User: Success!");
                                 FirebaseUser user = mAuth.getCurrentUser();
+                                Log.d(TAG, "Created User: Success!" + user);
+
                             } else {
                                 //Create user fail :\
                                 Log.w(TAG, "Create User: Fail!");

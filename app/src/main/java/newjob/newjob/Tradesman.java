@@ -30,13 +30,11 @@ public class Tradesman {
     private String partsTitle;
     private double partsCost;
     public ArrayList<String> trades = new ArrayList<String>();
-    private static Tradesman tradesman = new Tradesman();
 
     //Constructors
     public Tradesman(String name){
         setTitle(name);
     }
-    public static Tradesman getInstance(){return tradesman;}
     public Tradesman() {}
 
 
@@ -126,7 +124,6 @@ public class Tradesman {
         d.put("Gloss and finish woodwork", 265);
     }
 
-    //May cause redundancy if a second tradesman object is added verbatim with different
     public void writeTradeToDB(String title, HashMap<String, Object>taskList){
         tradesFile.document(title).set(taskList, SetOptions.merge());
     }
