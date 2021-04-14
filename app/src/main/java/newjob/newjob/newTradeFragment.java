@@ -107,14 +107,9 @@ public class newTradeFragment extends Fragment implements addTaskDialog.taskDial
             Log.d("Test, newTradeFrag", "tradeTitle = " + tradeTitle);
 
             if(!tradeTitle.isEmpty()) {
-                Log.d("Test", "newTradeFrag, Past trade title is empty");
                 //create and inflate addTaskDialog
                 FragmentTransaction ft = getChildFragmentManager().beginTransaction();
                 addTaskDialog taskDialog = new addTaskDialog();
-                Bundle args = new Bundle();
-                args.putString("title", tradeTitle);
-                args.putStringArrayList("tradeTitleArray", t);
-                taskDialog.setArguments(args);
                 taskDialog.show(ft, "From newTradeFragment");
             } else if (i == 0){
                 newTradeEditText.setError(getString(R.string.tradeTitle_err));

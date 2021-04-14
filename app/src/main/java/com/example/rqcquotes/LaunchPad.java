@@ -47,23 +47,6 @@ public class LaunchPad extends AppCompatActivity implements FirebaseCallBack {
         Button viewJobDraftsBtn = findViewById(R.id.viewDraft);
         Button contactsBtn = findViewById(R.id.contactsBtn);
 
-        /*
-         *Test db for content, if empty return false and create dummy data, store locally and with firebase
-         */
-
-        tradesman.dbTradesToArray(new FirebaseCallBack() {
-            @Override
-            public void onCallBack(ArrayList<String> list) {
-                if(list.isEmpty()){
-                    Log.d("Test", "LaunchPad, Call back list empty" + list);
-                    tradesman.trades.addAll(list);
-                    booFalse();
-                } else{
-                    tradesman.trades.addAll(list);
-                    Log.d("Test", "LaunchPad, List full" + tradesman.trades);
-                }
-            }
-        });
 
         Log.d("Test", "LaunchPad, tradesArray" + tradesman.trades.toString());
 
@@ -78,43 +61,35 @@ public class LaunchPad extends AppCompatActivity implements FirebaseCallBack {
             mAuth.signOut();
             startActivity(new Intent(LaunchPad.this, LogIn.class));
         });
-    }
 
+        /*
+         *Test db for content, if empty return false and create dummy data, store locally and with firebase
+         */
 
-    /*
-     *Check db for instances of trades objects, if true return boolean to skip function addToList
-     * REDUNDANT AFTER 16/03/21
-     */
-    /*public void checkDB(){
-        tradesFile.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        tradesman.dbTradesToArray(new FirebaseCallBack() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    Log.d("Test","we got success");
-                    for(QueryDocumentSnapshot doc : task.getResult()){
-                        if(doc.getId().equals("Electrician")){
-                            Log.d("Test","We got the bool");
-                            booTrue();
-                        } else {
-                            booFalse();
-                        }
-                    }
+            public void onCallBack(ArrayList<String> list) {
+                if(list.isEmpty()){
+                    Log.d("Test", "LaunchPad, Call back list empty" + list);
+                    tradesman.trades.addAll(list);
+                    addDummy();
+                } else{
+                    tradesman.trades.addAll(list);
+                    Log.d("Test", "LaunchPad, List full" + tradesman.trades);
                 }
             }
         });
-    }*/
 
-    public void booFalse(){
+    }
+
+    //Run through each Tradesman type
+    public void addDummy(){
         addToList("Electrician");
         addToList("Joiner");
         addToList("Decorator");
     }
 
-    public void booTrue(){
-
-    }
-
-    //Create dummy data
+    //Create dummy data with Tradesman Class function addTradeNames
     public void addToList(String t){
         Tradesman tradesman = new Tradesman(t);
         if(t.equals("Electrician")){
@@ -125,7 +100,7 @@ public class LaunchPad extends AppCompatActivity implements FirebaseCallBack {
             tradesman.addTradeNames(t);
         }
     }
-
+    //Pass to arrayList after async result
     @Override
     public void onCallBack(ArrayList<String> list) {
         arrayList.addAll(tradesman.trades);

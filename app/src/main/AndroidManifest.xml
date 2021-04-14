@@ -8,8 +8,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
         android:theme="@style/Theme.RQCQuotes">
-        <activity android:name="newjob.jobRoomDetails" />
+        <activity android:name="newjob.jobRoomDetails" android:configChanges="orientation|screenSize" />
         <activity android:name="newjob.NewJobStart" />
         <activity android:name=".RegisterUser" />
         <activity android:name=".LaunchPad" />

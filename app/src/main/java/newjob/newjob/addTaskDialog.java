@@ -59,12 +59,6 @@ public class addTaskDialog extends DialogFragment{
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_add_task, null);
 
-        //Pattern matcher for literal strings from different addTaskDialog calls
-        Pattern p = Pattern.compile("Add new task +");
-        Matcher m = p.matcher(mString);
-        Pattern q = Pattern.compile("Add Task +");
-        Matcher n = q.matcher(mString);
-
         /*
          *Test for new task and add trade names, this means that the calling window is jobRoomDetails and this is a new task
          * and it will be assigned to a trade upon creation
@@ -78,17 +72,21 @@ public class addTaskDialog extends DialogFragment{
                             //Get text and double from edittext views
                             EditText taskNameEditText = (EditText)view.findViewById(R.id.taskNameEditText);
                             EditText taskCostEditText = (EditText)view.findViewById(R.id.taskCostEditText);
-
-                            Log.d("Test", "addTaskDialog, edit text boxes: " + taskNameEditText.getText().toString());
-
-                            //Save the new task to task hashmap
-                            listener.onDialogPositiveClick(taskNameEditText.getText().toString(), taskCostEditText.getText().toString());
-
-                            Bundle result = new Bundle();
-                            result.putString("taskNameResult", taskNameEditText.getText().toString());
-                            result.putString("taskCostResult", taskCostEditText.getText().toString());
-                            getParentFragmentManager().setFragmentResult("resultKeyAddTaskDialog", result);
-
+                            if(taskNameEditText.getText().toString().isEmpty()) {
+                                taskNameEditText.setError("Please enter a Title");
+                                Log.d("Test", "addTaskDialog, edit text boxes empty");
+                            } else if(taskCostEditText.getText().toString().isEmpty()){
+                                taskCostEditText.setError("Please enter a cost value");
+                                Log.d("Test", "addTaskDialog, edit text boxes empty");
+                            } else {
+                                Log.d("Test", "addTaskDialog, edit text boxes: " + taskNameEditText.getText().toString());
+                                //Test interface listener
+                                listener.onDialogPositiveClick(taskNameEditText.getText().toString(), taskCostEditText.getText().toString());
+                                Bundle result = new Bundle();
+                                result.putString("taskNameResult", taskNameEditText.getText().toString());
+                                result.putString("taskCostResult", taskCostEditText.getText().toString());
+                                getParentFragmentManager().setFragmentResult("resultKeyAddTaskDialog", result);
+                            }
                         }
                     })
                     .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -98,7 +96,6 @@ public class addTaskDialog extends DialogFragment{
                             listener.onDialogNegativeClick(addTaskDialog.this);
                         }
                     });
-
         return builder.create();
     }
 }

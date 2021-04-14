@@ -14,12 +14,15 @@ import android.widget.Toast;
 
 import com.example.rqcquotes.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class NewJobStart extends AppCompatActivity {
+
+
     private EditText titleEditText;
     private String titleOfRoom;
     ArrayList<String> tradeTitles = new ArrayList<>();
@@ -33,7 +36,6 @@ public class NewJobStart extends AppCompatActivity {
         setContentView(R.layout.activity_new_job_start);
 
         titleEditText = findViewById(R.id.jobTitle);
-        titleOfRoom = titleEditText.getText().toString();
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {
@@ -48,6 +50,8 @@ public class NewJobStart extends AppCompatActivity {
                     Log.d("Test", "NewJobStart - return, before clear: " + Property.getInstance().getRoomObjectFromResult());
                     Property.getInstance().getRoomTasks().clear();
                     putToList();
+                } else if (test.equals("addRoomReturn") ){
+                    Log.d("Test", "NewJobStart - return, before clear: " + Property.getInstance().getRoomName());
                 }
             }
         } else {
@@ -69,12 +73,14 @@ public class NewJobStart extends AppCompatActivity {
             roomTypeMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
+                    titleOfRoom = titleEditText.getText().toString();
                     if(!item.toString().equals("Add room type +")){
                         if(titleOfRoom.equals("")){
                             Property.getInstance().setRoomName(item.toString());
                             Log.d("Test", "NewJobStart - menu click, room type: " + item);
                         }else {
-                            Property.getInstance().setRoomName(titleOfRoom);
+                            Property.getInstance().setRoomName(item.toString() + ": " + titleOfRoom);
+                            Log.d("Test", "NewJobStart - menu click, room name edit text full: " + titleOfRoom);
                         }
 
                         passToIntent(tradeTitles);
@@ -83,15 +89,19 @@ public class NewJobStart extends AppCompatActivity {
                 }
             });
         });
-        //End of room selection and push
+        //End of add Button
 
+        Button savePropertyBtn = (Button)findViewById(R.id.saveJobBtn);
+        savePropertyBtn.setOnClickListener(View -> {
+            Log.d("Test", "NewJobStart - menu click, room name edit text full: " + titleOfRoom);
+            Property.getInstance().writeTradeToDB(Property.getInstance().getRoomName(), Property.getInstance().getRoomObjectFromResult());
+        });
 
     }
 
 
     public void passToIntent(ArrayList<String> tradeTitles){
         Intent newJobIntent = new Intent(getBaseContext(), jobRoomDetails.class);
-        //newJobIntent.putExtra("Property Data", Property.getInstance());
         newJobIntent.putExtra("TradeTitleArray", tradeTitles);
 
         startActivity(newJobIntent);

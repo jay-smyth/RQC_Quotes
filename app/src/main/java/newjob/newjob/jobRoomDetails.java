@@ -70,12 +70,10 @@ public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.t
         viewModel.getList().observe(this, tradesVMArrayList -> {
             tradeTitlesViewModel.addAll(tradesVMArrayList);
             Log.d("Test", "jobRoomDetails, VM test- arrayList: " + tradeTitlesViewModel);
+            tradeTitles.clear();
+            tradeTitles.addAll(tradeTitlesViewModel);
         });
 
-        //Get property object from last Intent
-        /*p = (Property) getIntent().getSerializableExtra("Property Data");
-        //Set Title
-        jobRoomDetails.this.setTitle(p.getRoomCount() + ": " + p.getRoomName());*/
 
         /*
          *Retrieve array of trade names from previous activity
@@ -87,6 +85,9 @@ public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.t
         } else {
             Log.d("Test", "jobRoomDetails, tradeTitles received nothing from bundle" + tradeTitles);
             //MY-TO-DO add recovery option to retrieve data or create new instances of it.
+            if(tradeTitles.isEmpty()){
+                tradeTitles.addAll(tradeTitlesViewModel);
+            }
         }
 
         //Display tasks that have been created for this room
@@ -95,7 +96,7 @@ public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.t
             adapter = new myAdapter(Property.getInstance().getRoomTasks());
             taskList.setAdapter(adapter);
 
-        //TO-DO - create onClick function and pull key and value into edit texts of class newTaskFragment for editing
+
 
         /*
          * Add new task button, query db and retrieve trades to assign task to.
@@ -139,23 +140,30 @@ public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.t
         Button cancelBtn = findViewById(R.id.cancelJRDBtn);
 
         saveBtn.setOnClickListener(View ->{
-            Bundle resultFinal = new Bundle();
-            String roomName = Property.getInstance().getRoomCount()+ ": " + Property.getInstance().getRoomName();
+            if(!Property.getInstance().getRoomTasks().isEmpty()) {
+                Bundle resultFinal = new Bundle();
 
-            HashMap<String, Object> roomTasks = new HashMap<>();
-            roomTasks.putAll(Property.getInstance().getRoomTasks());
-            HashMap<String, Object> room = new HashMap<>();
-            room.put(roomName, roomTasks);
+                String roomName = Property.getInstance().getRoomCount() + ": " + Property.getInstance().getRoomName();
 
-            Property.getInstance().setRoomObjectFromResult(room);
+                HashMap<String, Object> roomTasks = new HashMap<>();
+                roomTasks.putAll(Property.getInstance().getRoomTasks());
+                HashMap<String, Object> room = new HashMap<>();
+                room.put(roomName, roomTasks);
 
-            Property.getInstance().setRoomCount(Property.getInstance().getRoomCount());
+                Property.getInstance().setRoomObjectFromResult(room);
 
-            Log.d("Test", Property.getInstance().getRoomObjectFromResult()+ " : " + Property.getInstance().getRoomTasks());
+                Property.getInstance().setRoomCount(Property.getInstance().getRoomCount());
 
-            Intent returnedResultIntent = new Intent(getBaseContext(), NewJobStart.class);
-            returnedResultIntent.putExtra("addRoomResult", "Success");
-            startActivity(returnedResultIntent, resultFinal);
+                Log.d("Test", Property.getInstance().getRoomObjectFromResult() + " : " + Property.getInstance().getRoomTasks());
+
+                Intent returnedResultIntent = new Intent(getBaseContext(), NewJobStart.class);
+                returnedResultIntent.putExtra("addRoomResult", "Success");
+                startActivity(returnedResultIntent, resultFinal);
+            } else {
+                Intent returnedResultIntent = new Intent(getBaseContext(), NewJobStart.class);
+                returnedResultIntent.putExtra("addRoomReturn", "Cancelled");
+                startActivity(returnedResultIntent);
+            }
         });
 
         cancelBtn.setOnClickListener(View ->{
@@ -234,26 +242,3 @@ public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.t
 
 }
 
-    /*
-     *Redundant after changes on 18/03/21
-     */
-    /*public void checkDB(){
-        tradesFile.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    Log.d("Test","we got success");
-                    for(QueryDocumentSnapshot doc : task.getResult()){
-                        if(doc.getId().equals("Electrician")){
-                            Log.d("Test","We got the bool");
-                            booTrue();
-                            return;
-                        } else {
-                            booFalse();
-                            return;
-                        }
-                    }
-                }
-            }
-        });
-    }*/

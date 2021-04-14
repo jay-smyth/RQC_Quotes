@@ -26,6 +26,11 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
                     android:id="@+id/tradeListview"/>
+                <Button
+                    android:id="@+id/addTradesmanBtn"
+                    style="@style/MyBtn"
+                    app:backgroundTint="@null"
+                    android:text="@string/addTradesman"/>
             </LinearLayout>
         </RelativeLayout>
     <FrameLayout

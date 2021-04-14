@@ -3,6 +3,7 @@
 import android.app.AlertDialog;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -68,10 +69,10 @@ public class tasksByTrade extends Fragment{
      FragmentTransaction ft;
      editPrice ed;
 
-     public String sayHello(){
+/*     public String sayHello(){
          //Log.d("Interface", "Test = " + mParam1);
          return mParam1;
-     }
+     }*/
 
 
 
@@ -123,8 +124,8 @@ public class tasksByTrade extends Fragment{
 
         //Display a list of what trades their are in the db if the taskFragment is not called from tradeForTask
         //The jobRoomDetails class can call this and the dialogFragment attached, to its lifecycle.
-        Button testBtn = (Button)view.findViewById(R.id.testBtn);
-        testBtn.setOnClickListener(View ->{
+        Button newTaskBtn = (Button)view.findViewById(R.id.testBtn);
+        newTaskBtn.setOnClickListener(View ->{
             showTaskDialog(mParam1);
         });
 
@@ -187,6 +188,17 @@ public class tasksByTrade extends Fragment{
             }
         });
 
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Log.d("Test", "tasksByTrade, back button press test");
+                Bundle result = new Bundle();
+                result.putString("taskBackBtn", "Back Button Pressed from tasksByTrade");
+                getParentFragmentManager().setFragmentResult("backBtnPress", result);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this,callback);
+
     }
 
     /*
@@ -196,6 +208,8 @@ public class tasksByTrade extends Fragment{
          //Bundle doesn't have a function to accept vectors?
          FragmentTransaction ftOne = getChildFragmentManager().beginTransaction();
          addTaskDialog d = new addTaskDialog();
+         //What? Depricaiated in normal Fragments but not AlertDialogs??
+         //d.setRetainInstance(true);
          Bundle args = new Bundle();
          args.putString("title",t);
          d.setArguments(args);

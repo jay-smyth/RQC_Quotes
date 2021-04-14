@@ -37,19 +37,6 @@ public class Tradesman {
     }
     public Tradesman() {}
 
-
-    public void addTradeNames(String tTitle){
-        Map<String, Object> data = new HashMap<>();
-        if(tTitle.contains("Electrician")){
-            createSpark(data);
-        } else if (tTitle.contains("Joiner")){
-            createJoiner(data);
-        } else if (tTitle.contains("Decorator")){
-            createDecor(data);
-        }
-        tradesFile.document(tTitle).set(data);
-    }
-
     /*
      * Loads data from db and should add all trades titles to a variable, data is loaded async so I need callbacks or I get null at the Array when I need it
      *
@@ -102,6 +89,18 @@ public class Tradesman {
     }
 
     public double getPartsCost(){return partsCost;}
+
+    public void addTradeNames(String tTitle){
+        Map<String, Object> data = new HashMap<>();
+        if(tTitle.contains("Electrician")){
+            createSpark(data);
+        } else if (tTitle.contains("Joiner")){
+            createJoiner(data);
+        } else if (tTitle.contains("Decorator")){
+            createDecor(data);
+        }
+        tradesFile.document(tTitle).set(data);
+    }
 
     public void createSpark(Map<String,Object> d) {
         d.put("Wire Plugs", 50);

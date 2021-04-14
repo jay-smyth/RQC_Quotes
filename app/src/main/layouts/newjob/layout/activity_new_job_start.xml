@@ -42,13 +42,13 @@
                 <Button
                     style="@style/MyBtn"
                     android:id="@+id/canJobBtn"
-                    android:text="@string/addTaskBtn"
+                    android:text="@string/cancel"
                     android:layout_weight="1"
                     app:backgroundTint="@null"/>
                 <Button
                     style="@style/MyBtn"
                     android:id="@+id/saveJobBtn"
-                    android:text="@string/addTaskByTradeBtn"
+                    android:text="@string/save"
                     android:layout_weight="1"
                     app:backgroundTint="@null"/>
             </LinearLayout>

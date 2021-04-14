@@ -1,10 +1,21 @@
 package newjob;
 
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
 import java.io.Serializable;
 import java.util.HashMap;
 
 public class Property implements Serializable {
+    //Firebase Globals
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final String mAuthId = mAuth.getUid();
+    CollectionReference tradesFile = db.collection("users").document(mAuthId).collection("properties");
+
     private String jobTitle;
     private String roomName;
     private int roomCount;
@@ -71,5 +82,9 @@ public class Property implements Serializable {
 
     public void setRoomTasks(HashMap<String, Object> tasksHashMap){
         roomTasks.putAll(tasksHashMap);
+    }
+
+    public void writeTradeToDB(String title, HashMap<String, Object>roomTasks){
+        tradesFile.document(title).set(roomTasks);
     }
 }
