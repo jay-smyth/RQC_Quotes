@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -16,8 +15,6 @@ import com.example.rqcquotes.MyViewModel;
 import com.example.rqcquotes.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Vector;
 
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
@@ -64,7 +61,7 @@ public class tradeForTask extends Fragment implements FirebaseCallBack {
 
         //Testing view model
         viewModel = new ViewModelProvider(this).get(MyViewModel .class);
-
+        //View model returns up to date TradeTitles list
         viewModel.getList().observe(getViewLifecycleOwner(), tradesVMArrayList -> {
             tradeTitlesViewModel.addAll(tradesVMArrayList);
             Log.d("Test", "tradeForTask, VM test- arrayList: " + tradeTitlesViewModel);
@@ -106,7 +103,7 @@ public class tradeForTask extends Fragment implements FirebaseCallBack {
                 }
             }
         });
-
+        //Returned listener from newTradeFragment
         getChildFragmentManager().setFragmentResultListener("resultFromNewTradeFrag", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
@@ -119,7 +116,7 @@ public class tradeForTask extends Fragment implements FirebaseCallBack {
             }
         });
 
-        //back button press listener
+        //back button press listener from newTradeFragment
         getChildFragmentManager().setFragmentResultListener("backBtnPress", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
@@ -146,19 +143,23 @@ public class tradeForTask extends Fragment implements FirebaseCallBack {
 
     public void removeChildFrag(String result){
         //Removes child fragments
-        if(result.equals("Success from tasksByTrade")) {
-            Log.d("Test", "tradeForTask - removeChildFrag, dismiss tasksByTrade");
-            getChildFragmentManager().beginTransaction().remove(tasksbyTradeFrag).commit();
-        } else if(result.equals("Success from newTradeFrag")){
-            Log.d("Test", "tradeForTask - removeChildFrag, dismiss newTradeFrag");
-            getChildFragmentManager().beginTransaction().remove(trade).commit();
-        } else if(result.equals("Back Button Pressed from tasksByTrade")){
-            Log.d("Test", "Back Button Pressed from tasksByTrade, passed but not removed frag");
-            getChildFragmentManager().beginTransaction().remove(tasksbyTradeFrag).commit();
+        switch (result) {
+            case "Success from tasksByTrade":
+                Log.d("Test", "tradeForTask - removeChildFrag, dismiss tasksByTrade");
+                getChildFragmentManager().beginTransaction().remove(tasksbyTradeFrag).commit();
+                break;
+            case "Success from newTradeFrag":
+                Log.d("Test", "tradeForTask - removeChildFrag, dismiss newTradeFrag");
+                getChildFragmentManager().beginTransaction().remove(trade).commit();
+                break;
+            case "Back Button Pressed from tasksByTrade":
+                Log.d("Test", "Back Button Pressed from tasksByTrade, passed but not removed frag");
+                getChildFragmentManager().beginTransaction().remove(tasksbyTradeFrag).commit();
+                break;
         }
     }
 
-    //
+    //Set fragment result
     public void passBackToAct(){
         Bundle result = new Bundle();
         result.putString("returnedFromTFT", "Success");

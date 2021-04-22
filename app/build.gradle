@@ -28,6 +28,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     sourceSets {
+        //Source jets are manually extended
         main {
             java {
                 srcDirs 'src\\main\\java', 'src\\main\\java\\newjob'

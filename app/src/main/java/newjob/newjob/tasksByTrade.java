@@ -1,11 +1,9 @@
  package newjob;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
@@ -31,7 +29,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
  /**
  * A simple {@link Fragment} subclass.
@@ -68,13 +65,6 @@ public class tasksByTrade extends Fragment{
 
      FragmentTransaction ft;
      editPrice ed;
-
-/*     public String sayHello(){
-         //Log.d("Interface", "Test = " + mParam1);
-         return mParam1;
-     }*/
-
-
 
     public void addNames(ArrayList<String> t){
         titles.addAll(t);
@@ -197,7 +187,7 @@ public class tasksByTrade extends Fragment{
                 getParentFragmentManager().setFragmentResult("backBtnPress", result);
             }
         };
-        requireActivity().getOnBackPressedDispatcher().addCallback(this,callback);
+        requireActivity().getOnBackPressedDispatcher().addCallback(tasksByTrade.this,callback);
 
     }
 

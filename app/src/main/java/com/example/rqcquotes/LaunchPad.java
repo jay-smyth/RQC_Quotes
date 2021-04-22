@@ -1,6 +1,5 @@
 package com.example.rqcquotes;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import newjob.FirebaseCallBack;
 import newjob.NewJobStart;
@@ -12,14 +11,9 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.common.base.Joiner;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -65,7 +59,6 @@ public class LaunchPad extends AppCompatActivity implements FirebaseCallBack {
         /*
          *Test db for content, if empty return false and create dummy data, store locally and with firebase
          */
-
         tradesman.dbTradesToArray(new FirebaseCallBack() {
             @Override
             public void onCallBack(ArrayList<String> list) {

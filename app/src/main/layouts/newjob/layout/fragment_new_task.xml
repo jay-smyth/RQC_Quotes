@@ -52,7 +52,7 @@
             <EditText
                 android:id="@+id/newTaskPriceEditText"
                 style="@style/editTextBox"
-                android:inputType="number"/>
+                android:inputType="numberDecimal"/>
 
             <TextView
                 style="@style/titleText"

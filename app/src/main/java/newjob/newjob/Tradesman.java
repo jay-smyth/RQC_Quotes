@@ -29,7 +29,7 @@ public class Tradesman {
     private double taskCost;
     private String partsTitle;
     private double partsCost;
-    public ArrayList<String> trades = new ArrayList<String>();
+    public ArrayList<String> trades = new ArrayList<>();
 
     //Constructors
     public Tradesman(String name){
@@ -89,7 +89,7 @@ public class Tradesman {
     }
 
     public double getPartsCost(){return partsCost;}
-
+    //create each dummy Tradesman and set details to database
     public void addTradeNames(String tTitle){
         Map<String, Object> data = new HashMap<>();
         if(tTitle.contains("Electrician")){
@@ -122,7 +122,7 @@ public class Tradesman {
         d.put("Paint single wall", 65);
         d.put("Gloss and finish woodwork", 265);
     }
-
+    //write any new Tradesman objects and update existing ones with new tasks
     public void writeTradeToDB(String title, HashMap<String, Object>taskList){
         tradesFile.document(title).set(taskList, SetOptions.merge());
     }

@@ -1,19 +1,14 @@
  package newjob;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,23 +16,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.rqcquotes.MyViewModel;
 import com.example.rqcquotes.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
-public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.taskDialogListener {
+ public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.taskDialogListener {
     //connect to firebase Auth and Firestore
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -48,7 +36,7 @@ public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.t
     //Property p;
 
     ArrayList<String> tradeTitles = new ArrayList<>();
-    ArrayList<String> tradeTitlesViewModel = new ArrayList<>();
+    final ArrayList<String> tradeTitlesViewModel = new ArrayList<>();
 
     private myAdapter adapter;
 
@@ -56,14 +44,13 @@ public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.t
     newTaskFragment nt;
     tradeForTask tradeForTaskFrag;
 
-    private MyViewModel viewModel;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_room_details);
-
+        jobRoomDetails.this.setTitle(Property.getInstance().getRoomName());
 
         /*
          *Retrieve array of trade names from previous activity
@@ -93,15 +80,9 @@ public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.t
          */
         Button addTaskBtn = findViewById(R.id.addTaskBtn);
         addTaskBtn.setOnClickListener(view -> {
-            ArrayList<String> v = new ArrayList<>(tradeTitlesViewModel);
-
-            Log.d("Test trade array", "Trades: " + v.toString());
-
             ftOne = getSupportFragmentManager().beginTransaction();
             nt = new newTaskFragment();
             Bundle args = new Bundle();
-            args.putString("title", "Add new task +");
-            args.putStringArrayList("tradeTitleArray", v);
             nt.setArguments(args);
             ftOne.replace(R.id.tradesmanList, nt);
             ftOne.commit();
@@ -199,23 +180,6 @@ public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.t
         });
     }
 
-
-    public boolean booTrue(){
-        return true;
-    }
-    public boolean booFalse(){return true;}
-
-    private class StableArrayAdapter extends ArrayAdapter<String>{
-
-        HashMap<String, Integer> myMap = new HashMap<String, Integer>();
-
-        public StableArrayAdapter(Context context, int textViewResourceId, List<String> objects){
-            super(context, textViewResourceId, objects);
-            for(int i = 0; i < objects.size(); ++i){
-                myMap.put(objects.get(i), i);
-            }
-        }
-    }
 
     /*
      * onDialogPositiveClick, onDialogNegativeClick and onDialogListSelect are interfaces with the addTaskDialog class,

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,7 +37,8 @@ public class RegisterUser extends AppCompatActivity {
     private TextView emailMsg;
     private TextView passOneMsg;
     private TextView passTwoMsg;
-
+    private String txtName;
+    private String txtEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +60,12 @@ public class RegisterUser extends AppCompatActivity {
 
         //Lambda expression for onClickListener
         regBtn.setOnClickListener(view -> {
-
-            String txtName = name.getText().toString();
-            String txtEmail = email.getText().toString();
+            //Get inputs text
+            txtName = name.getText().toString();
+            txtEmail = email.getText().toString();
             String txtPass_1 = passOne.getText().toString();
             String txtPass_2 = passTwo.getText().toString();
-
+            //Pass input values
             regUser(txtName, txtEmail, txtPass_1, txtPass_2);
         });
 
@@ -76,7 +76,7 @@ public class RegisterUser extends AppCompatActivity {
     }
 
 
-
+    //Register user if valForm returns true
     private void regUser(String name, String email, String passOne, String passTwo){
         if(valForm(name, email, passOne, passTwo)){
             mAuth.createUserWithEmailAndPassword(email,passOne)
@@ -87,12 +87,20 @@ public class RegisterUser extends AppCompatActivity {
                                 //Sign in for the win!!
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Log.d(TAG, "Created User: Success!" + user);
-
+                                addUID();
+                                startActivity(new Intent(RegisterUser.this, LaunchPad.class));
+                                finish();
                             } else {
                                 //Create user fail :\
                                 Log.w(TAG, "Create User: Fail!");
                                 Toast.makeText(RegisterUser.this,"Account creation failure!", Toast.LENGTH_SHORT).show();
                             }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error creating user: ", e);
+                            Toast.makeText(RegisterUser.this,"Account creation failure!" + e, Toast.LENGTH_SHORT).show();
                         }
                     });
         }
@@ -109,7 +117,6 @@ public class RegisterUser extends AppCompatActivity {
                     Log.v("","" + valPassword(passOne));
                     Toast.makeText(RegisterUser.this,"Passwords valid", Toast.LENGTH_SHORT).show();
                     if(passOne.equals(passTwo)){
-                        addUID();
                         return true;
                     } else {
                         passTwoMsg.setText(R.string.passMatchError);
@@ -156,13 +163,13 @@ public class RegisterUser extends AppCompatActivity {
         matcher = pattern.matcher(password);
         return matcher.matches();
     }
-
+    //Add User ID to Database
     private void addUID(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> data = new HashMap<>();
-        data.put("Name", mAuth.getCurrentUser().getDisplayName());
+        data.put("Name", txtName);
         data.put("Email", mAuth.getCurrentUser().getEmail());
-        data.put("Telephone", mAuth.getCurrentUser().getPhoneNumber());
+        data.put("Telephone", "");
 
         db.collection("users").document(mAuth.getUid())
                 .set(data)

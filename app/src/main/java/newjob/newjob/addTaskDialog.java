@@ -8,20 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.rqcquotes.R;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -72,6 +61,7 @@ public class addTaskDialog extends DialogFragment{
                             //Get text and double from edittext views
                             EditText taskNameEditText = (EditText)view.findViewById(R.id.taskNameEditText);
                             EditText taskCostEditText = (EditText)view.findViewById(R.id.taskCostEditText);
+                            //Validating doesn't provide interface feedback
                             if(taskNameEditText.getText().toString().isEmpty()) {
                                 taskNameEditText.setError("Please enter a Title");
                                 Log.d("Test", "addTaskDialog, edit text boxes empty");

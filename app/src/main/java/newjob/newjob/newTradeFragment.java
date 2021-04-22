@@ -15,10 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.rqcquotes.MyViewModel;
 import com.example.rqcquotes.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -37,7 +35,7 @@ public class newTradeFragment extends Fragment implements addTaskDialog.taskDial
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private final String mAuthId = mAuth.getUid();
     CollectionReference tradesFile = db.collection("users").document(mAuthId).collection("trades");
-    private Tradesman newTradeGuy = new Tradesman();
+    private final Tradesman newTradeGuy = new Tradesman();
 
 
     // default vars and args
@@ -61,27 +59,10 @@ public class newTradeFragment extends Fragment implements addTaskDialog.taskDial
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment newTradeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static newTradeFragment newInstance(String param1, String param2) {
-        newTradeFragment fragment = new newTradeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle(getString(R.string.newTradeFragTitle));
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -92,6 +73,7 @@ public class newTradeFragment extends Fragment implements addTaskDialog.taskDial
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view =  inflater.inflate(R.layout.fragment_new_trade, container, false);
         //Initialise UI components in here with View class object
         Button saveBtn = view.findViewById(R.id.saveBtn);
@@ -127,7 +109,7 @@ public class newTradeFragment extends Fragment implements addTaskDialog.taskDial
             }
             dismissFrag();
         });
-
+        //Result listener from addTaskDialog
         getChildFragmentManager().setFragmentResultListener("resultKeyAddTaskDialog", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {

@@ -2,6 +2,7 @@ package newjob;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -9,12 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.rqcquotes.LaunchPad;
 import com.example.rqcquotes.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -92,7 +93,11 @@ public class finalDetails extends AppCompatActivity {
                 finalCountDown.put("PropertyTasks", Property.getInstance().getRoomObjectFromResult());
                 //Every quote and all details at time of creation become unique
                 tradesFile.document().set(finalCountDown);
-                //Create return to start TODO
+                //Return to start and clear Property final result HashMap
+                Property.getInstance().clearRoomResObj();
+                startActivity(new Intent(finalDetails.this, LaunchPad.class));
+                Toast.makeText(finalDetails.this,"Success!, Your quote can be viewed online", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 

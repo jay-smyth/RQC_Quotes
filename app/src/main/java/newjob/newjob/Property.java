@@ -8,9 +8,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -23,7 +21,7 @@ public class Property implements Serializable {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private final String mAuthId = mAuth.getUid();
     CollectionReference tradesFile = db.collection("users").document(mAuthId).collection("quotes");
-
+    //Class attributes and HashMaps of tasks
     private String jobTitle;
     private String roomName;
     private int roomCount = 0;
@@ -85,14 +83,17 @@ public class Property implements Serializable {
     }
     public int getRoomCount(){return roomCount;}
 
+    //Add room and quotes to final object
     public void setRoomObjectFromResult(HashMap<String, Object> roomHashMap) {
         roomReturnedObj.putAll(roomHashMap);
     }
-
     public HashMap<String, Object>getRoomObjectFromResult(){
         return roomReturnedObj;
     }
 
+    public void clearRoomResObj(){
+        roomReturnedObj.clear();
+    }
 
     public HashMap<String, Object>getRoomTasks(){
         return roomTasks;
@@ -102,6 +103,7 @@ public class Property implements Serializable {
         roomTasks.putAll(tasksHashMap);
     }
 
+    //Test database for quotes and get count
     public int checkDB(){
         tradesFile.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

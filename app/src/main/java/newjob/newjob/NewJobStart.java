@@ -10,14 +10,9 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.rqcquotes.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class NewJobStart extends AppCompatActivity {
@@ -101,14 +96,14 @@ public class NewJobStart extends AppCompatActivity {
 
     }
 
-
+    //Create new room activity
     public void passToIntent(ArrayList<String> tradeTitles){
         Intent newJobIntent = new Intent(getBaseContext(), jobRoomDetails.class);
         newJobIntent.putExtra("TradeTitleArray", tradeTitles);
 
         startActivity(newJobIntent);
     }
-
+    //Present saved rooms to listview
     public void putToList(){
         listView = findViewById(R.id.roomList);
         Log.d("Test", "NewJobStart - return, after clear: " + Property.getInstance().getRoomObjectFromResult());
