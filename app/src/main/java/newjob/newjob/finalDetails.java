@@ -101,7 +101,7 @@ public class finalDetails extends AppCompatActivity {
 
         });
     }
-
+    //validate the customer input data, check for empty then test for basic string, no specials
     public boolean valCust(String cName, String cEmail, String cPhone){
         if(!cName.isEmpty() && !cEmail.isEmpty() && !cPhone.isEmpty()){
             Log.d("Test", "finalDetails, valCust for broad empty");
@@ -125,7 +125,7 @@ public class finalDetails extends AppCompatActivity {
         }
         return false;
     }
-
+    //validate the property input data, check for empty then test for basic string, no specials
     public boolean valProp(String pOne, String pTwo, String pTown, String pPost){
         if(!pOne.isEmpty() && !pTwo.isEmpty() && !pTown.isEmpty() && !pPost.isEmpty()){
             Log.d("Test", "finalDetails, valProp for broad empty");
@@ -153,7 +153,7 @@ public class finalDetails extends AppCompatActivity {
         }
         return false;
     }
-
+    //test every input for a basic string, no specials
     public boolean basicString (String text){
         Pattern pattern;
         Matcher matcher;
@@ -162,11 +162,11 @@ public class finalDetails extends AppCompatActivity {
         matcher = pattern.matcher(text);
         return matcher.matches();
     }
-
+    //test for valid email structure
     public boolean valEmail(final String email){
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-
+    //Test for a standard UK mobile number
     public boolean valPhone (String number){
         Pattern pattern;
         Matcher matcher;
