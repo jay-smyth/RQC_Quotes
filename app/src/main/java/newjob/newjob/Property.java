@@ -1,27 +1,37 @@
 package newjob;
 
 
+import android.util.Log;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.io.Serializable;
 import java.util.HashMap;
+
+import androidx.annotation.NonNull;
 
 public class Property implements Serializable {
     //Firebase Globals
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private final String mAuthId = mAuth.getUid();
-    CollectionReference tradesFile = db.collection("users").document(mAuthId).collection("properties");
+    CollectionReference tradesFile = db.collection("users").document(mAuthId).collection("quotes");
 
     private String jobTitle;
     private String roomName;
-    private int roomCount;
+    private int roomCount = 0;
+    int count = 0;
+    private String[] custDetails;
     private String[] jobAddr;
     private String[] roomType = {"Bedroom", "Livingroom", "Kitchen", "Bathroom"};
-    private HashMap<String, Object> roomReturnedObj = new HashMap<>();
+    private final HashMap<String, Object> roomReturnedObj = new HashMap<>();
     private HashMap<String, Object> roomTasks = new HashMap<>();
 
     private static Property property = new Property();
@@ -44,6 +54,14 @@ public class Property implements Serializable {
 
     public String getRoomName(){
         return roomName;
+    }
+
+    public void setCustDetails(String[] jobAddr) {
+        this.custDetails = jobAddr;
+    }
+
+    public String[] getCustDetails() {
+        return custDetails;
     }
 
     public void setJobAddr(String[] jobAddr) {
@@ -84,7 +102,16 @@ public class Property implements Serializable {
         roomTasks.putAll(tasksHashMap);
     }
 
-    public void writeTradeToDB(String title, HashMap<String, Object>roomTasks){
-        tradesFile.document(title).set(roomTasks);
+    public int checkDB(){
+        tradesFile.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                QuerySnapshot query = task.getResult();
+                count = query.size();
+                Log.d("Test", "Property.java, quotes count: " + count);
+            }
+        });
+
+        return count;
     }
 }

@@ -20,4 +20,7 @@
     <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="addTradesman">Add new Tradesman</string>
+    <string name="jobFinalDetHeader">"Job address and Customer details to finish "</string>
+    <string name="jobSubHeader2">Enter customer detials below</string>
+    <string name="jobAddrHeader">Enter Property address below</string>
 </resources>

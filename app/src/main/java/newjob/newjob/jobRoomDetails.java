@@ -64,16 +64,6 @@ public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.t
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_room_details);
 
-        //Testing view model
-        viewModel = new ViewModelProvider(this).get(MyViewModel.class);
-
-        viewModel.getList().observe(this, tradesVMArrayList -> {
-            tradeTitlesViewModel.addAll(tradesVMArrayList);
-            Log.d("Test", "jobRoomDetails, VM test- arrayList: " + tradeTitlesViewModel);
-            tradeTitles.clear();
-            tradeTitles.addAll(tradeTitlesViewModel);
-        });
-
 
         /*
          *Retrieve array of trade names from previous activity
@@ -231,9 +221,8 @@ public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.t
      * onDialogPositiveClick, onDialogNegativeClick and onDialogListSelect are interfaces with the addTaskDialog class,
      * the appropriate data is sent back to this parent class for manipulation
      */
-    public void onDialogPositiveClick(String name, String cost){
-        Log.d("Test", "jobRoomDetails, WTF is the point of an interface" + name + "  " + cost);
-
+    public void onDialogPositiveClick(String taskName, String taskCost){
+        Log.d("Test", "newTradeFragment returned value from AlertDialog is: " + taskName + taskCost);
     }
 
     public void onDialogNegativeClick(DialogFragment dialogFragment){

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="newjob.jobRoomDetails">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                style="@style/textBox"
+                android:id="@+id/jobFinalDetHeader"
+                android:text="@string/jobFinalDetHeader"
+                android:layout_marginBottom="10dp"/>
+
+
+            <TextView
+                style="@style/textBox"
+                android:id="@+id/jobSubHeader2"
+                android:text="@string/jobSubHeader2"/>
+            <View
+                android:background="@color/black"
+                style="@style/underView"/>
+            <EditText
+                android:id="@+id/custNameET"
+                style="@style/editTextBox"
+                android:inputType="textCapSentences"
+                android:hint="Customer Name"
+                android:importantForAutofill="no"/>
+            <EditText
+                android:id="@+id/custEmailET"
+                style="@style/editTextBox"
+                android:inputType="textEmailAddress"
+                android:hint="Customer Email"
+                android:importantForAutofill="no" />
+            <EditText
+                android:id="@+id/custPhoneET"
+                style="@style/editTextBox"
+                android:inputType="phone"
+                android:hint="Mobile Number"
+                android:importantForAutofill="no"/>
+            <TextView
+                style="@style/textBox"
+                android:id="@+id/jobAddrHeader"
+                android:text="@string/jobAddrHeader"/>
+            <View
+                android:background="@color/black"
+                style="@style/underView"/>
+            <EditText
+                android:id="@+id/propAddrLineOne"
+                style="@style/editTextBox"
+                android:inputType="textCapSentences"
+                android:hint="Address Line 1"
+                android:importantForAutofill="no"/>
+            <EditText
+                android:id="@+id/propAddrLineTwo"
+                style="@style/editTextBox"
+                android:inputType="textCapSentences"
+                android:hint="Address Line 2"
+                android:importantForAutofill="no" />
+            <EditText
+                android:id="@+id/propAddrTown"
+                style="@style/editTextBox"
+                android:inputType="textCapSentences"
+                android:hint="Town"
+                android:importantForAutofill="no" />
+            <EditText
+                android:id="@+id/propAddrPost"
+                style="@style/editTextBox"
+                android:inputType="textCapSentences"
+                android:hint="Post Code"
+                android:importantForAutofill="no" />
+            
+            <!--grouped buttons-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+                <Button
+                    style="@style/MyBtn"
+                    android:id="@+id/cancelJRDBtn"
+                    android:text="@string/cancel"
+                    android:layout_weight="1"
+                    app:backgroundTint="@null"/>
+                <Button
+                    style="@style/MyBtn"
+                    android:id="@+id/saveJRDBtn"
+                    android:text="@string/save"
+                    android:layout_weight="1"
+                    app:backgroundTint="@null"/>
+            </LinearLayout>
+            <!--grouped buttons-->
+        </LinearLayout>
+    </ScrollView>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

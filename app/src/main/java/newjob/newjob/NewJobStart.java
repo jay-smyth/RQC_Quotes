@@ -94,7 +94,9 @@ public class NewJobStart extends AppCompatActivity {
         Button savePropertyBtn = (Button)findViewById(R.id.saveJobBtn);
         savePropertyBtn.setOnClickListener(View -> {
             Log.d("Test", "NewJobStart - menu click, room name edit text full: " + titleOfRoom);
-            Property.getInstance().writeTradeToDB(Property.getInstance().getRoomName(), Property.getInstance().getRoomObjectFromResult());
+            //Property.getInstance().writeTradeToDB(Property.getInstance().getRoomName(), Property.getInstance().getRoomObjectFromResult());
+            Intent finalDetails = new Intent(getBaseContext(), newjob.finalDetails.class);
+            startActivity(finalDetails);
         });
 
     }
