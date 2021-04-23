@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".LogIn">
-
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ScrollView
+        android:layout_height="match_parent"
+        tools:context=".LogIn">
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="50dp"
-                    android:src="@drawable/rqc_logo_1" />
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/emailField"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
-                    style="@style/editTextBox"/>
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="50dp"
+                        android:src="@drawable/rqc_logo_1" />
 
-                <EditText
-                    android:id="@+id/passField"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    style="@style/editTextBox"/>
+                    <EditText
+                        android:id="@+id/emailField"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        style="@style/editTextBox"/>
 
-                <TextView
-                    android:id="@+id/textInput_error"
-                    style="@style/textBox"/>
+                    <EditText
+                        android:id="@+id/passField"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        style="@style/editTextBox"/>
 
-                <Button
-                    android:id="@+id/logInSendBtn"
-                    style="@style/MyBtn"
-                    android:text="@string/logInTxt"
-                    app:backgroundTint="@null"/>
+                    <TextView
+                        android:id="@+id/textInput_error"
+                        style="@style/errorMsg"/>
 
-                <Button
-                    android:id="@+id/cancelBtn"
-                    style="@style/MyBtn"
-                    android:text="@string/cancel"
-                    app:backgroundTint="@null"/>
+                    <Button
+                        android:id="@+id/logInSendBtn"
+                        style="@style/MyBtn"
+                        android:text="@string/logInTxt"
+                        app:backgroundTint="@null"/>
 
-            </LinearLayout>
-        </ScrollView>
-    </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <Button
+                        android:id="@+id/cancelBtn"
+                        style="@style/MyBtn"
+                        android:text="@string/cancel"
+                        app:backgroundTint="@null"/>
+
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

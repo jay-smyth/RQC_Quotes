@@ -30,11 +30,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
 
- /**
- * A simple {@link Fragment} subclass.
- * Use the {@link tasksByTrade#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class tasksByTrade extends Fragment{
 
     //Add db query for all tasks associated against what is passed to the ArrayList<String> titles.
@@ -43,7 +38,6 @@ public class tasksByTrade extends Fragment{
     private final String mAuthId = mAuth.getUid();
     CollectionReference tradesFile = db.collection("users").document(mAuthId).collection("trades");
 
-     // TODO: Rename parameter arguments, choose names that match
      // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
      private static final String ARG_PARAM1 = "param1";
 
@@ -74,14 +68,7 @@ public class tasksByTrade extends Fragment{
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @return A new instance of fragment tasksByTrade.
-     */
-    // TODO: Rename and change types and number of parameters
+    //Launch call for new instance of Fragment class  TODO can be removed as new Instance is not necessary
     public static tasksByTrade newInstance(String param1) {
         tasksByTrade fragment = new tasksByTrade();
         Bundle args = new Bundle();
@@ -177,7 +164,7 @@ public class tasksByTrade extends Fragment{
                 passBackToAct();
             }
         });
-
+        //Catch back button press and return to parent Fragment
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -191,9 +178,7 @@ public class tasksByTrade extends Fragment{
 
     }
 
-    /*
-     *Call custom alert dialog and pass
-     */
+    //Call custom alert dialog and pass
      public void showTaskDialog(String t){
          //Bundle doesn't have a function to accept vectors?
          FragmentTransaction ftOne = getChildFragmentManager().beginTransaction();
@@ -226,7 +211,7 @@ public class tasksByTrade extends Fragment{
                          dbData.putAll(d.getData());
 
                          Log.d("Test", "tasksByTrade, returned db data" + dbData.toString());
-
+                        //Creates and populates tasks list after successful query
                          displayTaskList();
 
                      } else {
@@ -260,21 +245,22 @@ public class tasksByTrade extends Fragment{
                  Object valueFromMap = adapt.getItem(position).getValue();
                  String objStr = valueFromMap.toString();
                  Double dub = Double.valueOf(objStr).doubleValue();
+                 //Send to start edit price fragment
                  passToFragment(keyFromMap,dub);
              }
          });
      }
 
+     //add editted task and new cost to room task list
     public void addToRoomTasks(String name, String cost){
         HashMap<String, Object> temp = new HashMap<>();
         temp.put(name,cost);
         Property.getInstance().setRoomTasks(temp);
     }
 
+    //Return to JobroomDetails.java to repeat process
     public void passBackToAct(){
         Bundle result = new Bundle();
-        result.putString("returnedTaskName", taskName);
-        result.putString("returnedTaskCost", taskCost);
         result.putString("returnedFromTBT", "Success from tasksByTrade");
         getParentFragmentManager().setFragmentResult("resultKeyTFT", result);
     }

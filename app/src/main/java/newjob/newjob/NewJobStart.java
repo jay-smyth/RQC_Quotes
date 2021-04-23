@@ -16,14 +16,11 @@ import com.example.rqcquotes.R;
 import java.util.ArrayList;
 
 public class NewJobStart extends AppCompatActivity {
-
-
+    //UI Globals
     private EditText titleEditText;
     private String titleOfRoom;
-    ArrayList<String> tradeTitles = new ArrayList<>();
-
-    myAdapter adapter;
-    ListView listView;
+    //For pass TradeTitles from LaunchPad.java
+    private ArrayList<String> tradeTitles = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,26 +29,20 @@ public class NewJobStart extends AppCompatActivity {
 
         titleEditText = findViewById(R.id.jobTitle);
         Bundle bundle = getIntent().getExtras();
-
+        //Get passed Trade Titles from bundle
         if (bundle != null) {
             tradeTitles = bundle.getStringArrayList("TradeTitleArray");
             Log.d("Test", "NewJobStart, tradeTitles received from bundle" + tradeTitles + ", Room count: " + Property.getInstance().getRoomCount());
-
+            //Check for created rooms and present to listView
             if(Property.getInstance().getRoomCount() > 0) {
-                String test = bundle.getString("addRoomResult");
-                Log.d("Test", "NewJobStart, result from jobRoomDetails received from bundle" + test);
-
-                if (test.equals("Success")) {
-                    Log.d("Test", "NewJobStart - return, before clear: " + Property.getInstance().getRoomObjectFromResult());
-                    Property.getInstance().getRoomTasks().clear();
-                    putToList();
-                } else if (test.equals("addRoomReturn") ){
-                    Log.d("Test", "NewJobStart - return, before clear: " + Property.getInstance().getRoomName());
-                }
+                Log.d("Test", "NewJobStart - return, before clear: " + Property.getInstance().getRoomObjectFromResult());
+                Property.getInstance().getRoomTasks().clear();
+                //Present created rooms to listView
+                putToList();
             }
         } else {
             Log.d("Test", "NewJobStart, tradeTitles received nothing from bundle" + tradeTitles);
-            //MY-TO-DO add recovery option to retrieve data or create new instances of it.
+            //TODO add recovery option to retrieve data or create new instances of it.
             }
 
        //Begin room selection and push to array
@@ -64,7 +55,7 @@ public class NewJobStart extends AppCompatActivity {
             }
             roomTypeMenu.getMenu().add("Add room type +");
             roomTypeMenu.show();
-
+            //Get room type and add to Property Room Name
             roomTypeMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
@@ -84,7 +75,6 @@ public class NewJobStart extends AppCompatActivity {
                 }
             });
         });
-        //End of add Button
 
         Button savePropertyBtn = (Button)findViewById(R.id.saveJobBtn);
         savePropertyBtn.setOnClickListener(View -> {
@@ -105,9 +95,9 @@ public class NewJobStart extends AppCompatActivity {
     }
     //Present saved rooms to listview
     public void putToList(){
-        listView = findViewById(R.id.roomList);
+        ListView listView = findViewById(R.id.roomList);
         Log.d("Test", "NewJobStart - return, after clear: " + Property.getInstance().getRoomObjectFromResult());
-        adapter = new myAdapter(Property.getInstance().getRoomObjectFromResult());
+        myAdapter adapter = new myAdapter(Property.getInstance().getRoomObjectFromResult());
         listView.setAdapter(adapter);
         ;
     }

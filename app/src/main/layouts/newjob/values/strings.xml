@@ -6,7 +6,7 @@
     <string name="create_task">Create a new task</string>
     <string name="delete_task">Delete task from trades category</string>
     <string name="task_by_t_frag_title">Select a trade task or add a new one.</string>
-    <string name="title_to_quote">Title your quote "&#xD;(If you leave it blank we'll use the address)"</string>
+    <string name="title_to_room">Title the new room "&#xD;(If you leave it blank we'll use the room type and number)"</string>
     <string name="add_room">Add room</string>
     <string name="add_task">Add Task</string>
     <string name="add_task_ex">Add a task name</string>
@@ -24,4 +24,7 @@
     <string name="jobSubHeader2">Enter customer detials below</string>
     <string name="jobAddrHeader">Enter Property address below</string>
     <string name="newTradeFragTitle">Create New Trade</string>
+    <string name="log_in_user_err">No User Exists please return and register</string>
+    <string name="log_in_cred_err">Invalid Email or Password</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

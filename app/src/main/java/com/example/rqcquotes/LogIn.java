@@ -96,9 +96,9 @@ public class LogIn extends AppCompatActivity {
 
                 if(e instanceof FirebaseAuthInvalidCredentialsException){
                     //errText.setText(((FirebaseAuthInvalidCredentialsException) e).getErrorCode());  **Redundant but possibly useful function later on
-                    errText.setText("Invalid Email or Password");
+                    errText.setText(R.string.log_in_cred_err);
                 } else if(e instanceof FirebaseAuthInvalidUserException){
-                    errText.setText("Invalid Email or Password");
+                    errText.setText(R.string.log_in_user_err);
                 }
 
             }

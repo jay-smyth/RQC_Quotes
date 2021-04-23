@@ -15,7 +15,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="@string/title_to_quote"
+                android:text="@string/title_to_room"
                 style="@style/textBox"/>
 
             <EditText

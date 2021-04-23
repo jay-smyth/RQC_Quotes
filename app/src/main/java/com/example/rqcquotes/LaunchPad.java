@@ -19,11 +19,9 @@ import java.util.ArrayList;
 
 
 public class LaunchPad extends AppCompatActivity implements FirebaseCallBack {
-    //connect to firebase Auth and Firestore
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //Firebase Globals
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private final String mAuthId = mAuth.getUid();
-    CollectionReference tradesFile = db.collection("users").document(mAuthId).collection("trades");
+    //Globals for dummy data creation
     Tradesman tradesman = new Tradesman();
     ArrayList<String> arrayList = new ArrayList<>();
 
@@ -36,7 +34,7 @@ public class LaunchPad extends AppCompatActivity implements FirebaseCallBack {
 
         //initialise and find buttons
         Button newJobBtn = findViewById(R.id.newJobBtn);
-        Button actJobBtn = findViewById(R.id.oldJobs);
+        Button tempSignOutBtn = findViewById(R.id.signOut);
         Button viewQuoteBtn = findViewById(R.id.viewQuotes);
         Button viewJobDraftsBtn = findViewById(R.id.viewDraft);
         Button contactsBtn = findViewById(R.id.contactsBtn);
@@ -46,19 +44,16 @@ public class LaunchPad extends AppCompatActivity implements FirebaseCallBack {
 
         newJobBtn.setOnClickListener(view ->{
             Intent newJobIntent = new Intent(getBaseContext(), NewJobStart.class);
-            newJobIntent.putExtra("User ID", mAuthId);
             newJobIntent.putExtra("TradeTitleArray", tradesman.trades);
             startActivity(newJobIntent);
         });
-
-        actJobBtn.setOnClickListener(view -> {
+        //TODO temp button, button to be replaced
+        tempSignOutBtn.setOnClickListener(view -> {
             mAuth.signOut();
             startActivity(new Intent(LaunchPad.this, LogIn.class));
         });
 
-        /*
-         *Test db for content, if empty return false and create dummy data, store locally and with firebase
-         */
+        //Test db for content, if empty return false and create dummy data, store locally and with firebase
         tradesman.dbTradesToArray(new FirebaseCallBack() {
             @Override
             public void onCallBack(ArrayList<String> list) {

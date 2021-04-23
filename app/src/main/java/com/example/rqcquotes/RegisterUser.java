@@ -83,18 +83,12 @@ public class RegisterUser extends AppCompatActivity {
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()) {
                                 //Sign in for the win!!
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Log.d(TAG, "Created User: Success!" + user);
                                 addUID();
                                 startActivity(new Intent(RegisterUser.this, LaunchPad.class));
                                 finish();
-                            } else {
-                                //Create user fail :\
-                                Log.w(TAG, "Create User: Fail!");
-                                Toast.makeText(RegisterUser.this,"Account creation failure!", Toast.LENGTH_SHORT).show();
-                            }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -109,7 +103,7 @@ public class RegisterUser extends AppCompatActivity {
 
     public boolean valForm(String name, String email, String passOne, String passTwo){
         //test that fields have input
-        if(!name.isEmpty() || !email.isEmpty() || !passOne.isEmpty() || !passTwo.isEmpty()){
+        if(!name.isEmpty() && !email.isEmpty() && !passOne.isEmpty() && !passTwo.isEmpty()){
 
             if(valEmail(email)){
 
@@ -139,7 +133,7 @@ public class RegisterUser extends AppCompatActivity {
                 Toast.makeText(RegisterUser.this,"Email required!", Toast.LENGTH_SHORT).show();
             } else if (passOne.isEmpty()){
                 Toast.makeText(RegisterUser.this,"Empty password field!", Toast.LENGTH_SHORT).show();
-            } else if (passTwo.isEmpty()){
+            } else {
                 Toast.makeText(RegisterUser.this,"Empty password field!", Toast.LENGTH_SHORT).show();
             }
         }
@@ -147,12 +141,7 @@ public class RegisterUser extends AppCompatActivity {
     }
 
     public boolean valEmail(final String email){
-        if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            return true;
-        } else {
-            return false;
-        }
-
+       return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     public boolean valPassword(final String password){
@@ -170,7 +159,7 @@ public class RegisterUser extends AppCompatActivity {
         data.put("Name", txtName);
         data.put("Email", mAuth.getCurrentUser().getEmail());
         data.put("Telephone", "");
-
+        //query for users new unique ID and add to Cloud Firestore
         db.collection("users").document(mAuth.getUid())
                 .set(data)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

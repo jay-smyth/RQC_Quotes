@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RQCQuotes">
-        <activity android:name="newjob.finalDetails"></activity>
+        <activity android:name="newjob.finalDetails" />
         <activity
             android:name="newjob.jobRoomDetails"
             android:configChanges="orientation|screenSize" />

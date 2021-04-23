@@ -44,8 +44,8 @@
                     style="@style/underView"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/oldJobs"
-                    android:text="@string/Jobs"
+                    android:id="@+id/signOut"
+                    android:text="@string/sign_out"
                     style="@style/MyBtn"/>
 
                 <androidx.appcompat.widget.AppCompatButton

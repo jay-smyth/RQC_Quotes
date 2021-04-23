@@ -26,20 +26,11 @@ import java.util.HashMap;
 import java.util.List;
 
  public class jobRoomDetails extends AppCompatActivity implements addTaskDialog.taskDialogListener {
-    //connect to firebase Auth and Firestore
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private final String mAuthId = mAuth.getUid();
-    CollectionReference tradesFile = db.collection("users").document(mAuthId).collection("trades");
-
-    //create object of type property to populate from last Intent
-    //Property p;
-
+    //UI Globals
     ArrayList<String> tradeTitles = new ArrayList<>();
     final ArrayList<String> tradeTitlesViewModel = new ArrayList<>();
-
     private myAdapter adapter;
-
+    //Fragment globals
     FragmentTransaction ftOne;
     newTaskFragment nt;
     tradeForTask tradeForTaskFrag;
@@ -50,34 +41,22 @@ import java.util.List;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_room_details);
+        //Set room title in Action bar
         jobRoomDetails.this.setTitle(Property.getInstance().getRoomName());
 
-        /*
-         *Retrieve array of trade names from previous activity
-         */
+        //Retrieve array of trade names from previous activity
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             tradeTitles = bundle.getStringArrayList("TradeTitleArray");
             Log.d("Test", "jobRoomDetails, tradeTitles received from bundle" + tradeTitles);
-        } else {
-            Log.d("Test", "jobRoomDetails, tradeTitles received nothing from bundle" + tradeTitles);
-            //MY-TO-DO add recovery option to retrieve data or create new instances of it.
-            if(tradeTitles.isEmpty()){
-                tradeTitles.addAll(tradeTitlesViewModel);
-            }
         }
 
         //Display tasks that have been created for this room
+        ListView taskList = findViewById(R.id.listView);
+        adapter = new myAdapter(Property.getInstance().getRoomTasks());
+        taskList.setAdapter(adapter);
 
-            ListView taskList = findViewById(R.id.listView);
-            adapter = new myAdapter(Property.getInstance().getRoomTasks());
-            taskList.setAdapter(adapter);
-
-
-
-        /*
-         * Add new task button, query db and retrieve trades to assign task to.
-         */
+        //Add new task button, query db and retrieve trades to assign task to.
         Button addTaskBtn = findViewById(R.id.addTaskBtn);
         addTaskBtn.setOnClickListener(view -> {
             ftOne = getSupportFragmentManager().beginTransaction();
@@ -88,9 +67,7 @@ import java.util.List;
             ftOne.commit();
         });
 
-        /*
-        * Add by trade button to open a fragment and allow the selection of trade specific tasks pulled from db
-        */
+        //Add by trade button to open a fragment and allow the selection of trade specific tasks pulled from db
         Button addByBtn = findViewById(R.id.addTaskByTradeBtn);
         //Open top-level fragment to allow user to select which trade tasks to add to the room
         addByBtn.setOnClickListener(view -> {
@@ -113,24 +90,24 @@ import java.util.List;
         saveBtn.setOnClickListener(View ->{
             if(!Property.getInstance().getRoomTasks().isEmpty()) {
                 Bundle resultFinal = new Bundle();
-
+                //Set room name
                 String roomName = Property.getInstance().getRoomCount() + ": " + Property.getInstance().getRoomName();
-
-                HashMap<String, Object> roomTasks = new HashMap<>();
-                roomTasks.putAll(Property.getInstance().getRoomTasks());
+                //Get room tasks HashMap and nest in Room Object
+                HashMap<String, Object> roomTasks = new HashMap<>(Property.getInstance().getRoomTasks());
                 HashMap<String, Object> room = new HashMap<>();
                 room.put(roomName, roomTasks);
-
+                //Pass room HashMap to Property class total room HashMap
                 Property.getInstance().setRoomObjectFromResult(room);
-
+                //Update room count
                 Property.getInstance().setRoomCount(Property.getInstance().getRoomCount());
 
                 Log.d("Test", Property.getInstance().getRoomObjectFromResult() + " : " + Property.getInstance().getRoomTasks());
-
+                //Intent result launcher for return to NewJobStart.java
                 Intent returnedResultIntent = new Intent(getBaseContext(), NewJobStart.class);
                 returnedResultIntent.putExtra("addRoomResult", "Success");
                 startActivity(returnedResultIntent, resultFinal);
             } else {
+                //Test for save button press and an empty room
                 Intent returnedResultIntent = new Intent(getBaseContext(), NewJobStart.class);
                 returnedResultIntent.putExtra("addRoomReturn", "Cancelled");
                 startActivity(returnedResultIntent);
@@ -138,7 +115,7 @@ import java.util.List;
         });
 
         cancelBtn.setOnClickListener(View ->{
-
+            //TODO Create cancel result to start new room again
         });
 
         //Return from tradeForTask success
@@ -147,20 +124,19 @@ import java.util.List;
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
                 // We use a String here, but any type that can be put in a Bundle is supported
                 String result = bundle.getString("returnedFromTradeForTask");
-                // Do something with the result#
+                // Do something with the result
                 Log.d("Test", "jobRoomDetails, returned result from editPrice fragment" + result + Property.getInstance().getRoomTasks());
                 //Removes child fragment
                 getSupportFragmentManager().beginTransaction().remove(tradeForTaskFrag).commit();
 
                 //Display tasks that have been created for this room
-
                 ListView taskList = findViewById(R.id.listView);
                 adapter = new myAdapter(Property.getInstance().getRoomTasks());
                 taskList.setAdapter(adapter);
             }
         });
 
-        //Return from newTaskFrag
+        //Return from newTaskFrag success
         getSupportFragmentManager().setFragmentResultListener("resultFromNewTaskFrag", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
@@ -172,7 +148,6 @@ import java.util.List;
                 getSupportFragmentManager().beginTransaction().remove(nt).commit();
 
                 //Display tasks that have been created for this room
-
                 ListView taskList = findViewById(R.id.listView);
                 adapter = new myAdapter(Property.getInstance().getRoomTasks());
                 taskList.setAdapter(adapter);

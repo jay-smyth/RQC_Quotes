@@ -28,17 +28,17 @@ import java.util.regex.Pattern;
 
 public class newTaskFragment extends Fragment{
 
+    //UI globals
     private MyViewModel viewModel;
     ArrayList<String> tradeTitlesViewModel = new ArrayList<>();
     private HashMap<String, Object> newTask= new HashMap<String, Object>();
     ArrayAdapter<String> arrayAdapter;
-    //UI globals
     EditText newTaskTitle;
     EditText newTaskCost;
     ListView listView;
     int pos;
 
-    //
+    //Initialise Tradesman Object for new task to be added
     Tradesman tradesGuy = new Tradesman();
 
     public newTaskFragment() {
@@ -49,7 +49,7 @@ public class newTaskFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            Log.d("Test", "newTaskFragment, Bundle should be empty");
         }
         
     }
@@ -159,6 +159,7 @@ public class newTaskFragment extends Fragment{
         tradesGuy.writeTradeToDB(tradeName, newTask);
         //Console test variables and pass to Property class
         Log.d("Test", "newTaskFragment, HashMap within class is: " + newTask);
+        //Pass task to room task list
         Property.getInstance().setRoomTasks(newTask);
         Log.d("Test", "newTaskFragment, singleton test for hashmap" + Property.getInstance().getRoomTasks());
 
@@ -166,7 +167,7 @@ public class newTaskFragment extends Fragment{
 
         requireActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
     }
-
+    //Pass result back to parent after success
     public void dismissFrag(){
         Bundle result = new Bundle();
         result.putString("newTaskFragResult", "Success from newTaskFrag");

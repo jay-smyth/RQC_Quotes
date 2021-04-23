@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
     //Logout button
      logOutBtn.setOnClickListener(view -> {
          mAuth.signOut();
-         Log.d("Not signed out", "UiD = " + mAuth.getUid());
+         Log.d("Signed out", "UiD = " + mAuth.getUid());
+         Toast.makeText(MainActivity.this,"Signed out last known User!", Toast.LENGTH_SHORT).show();
      });
 
     }

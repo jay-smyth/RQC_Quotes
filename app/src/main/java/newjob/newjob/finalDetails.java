@@ -95,6 +95,7 @@ public class finalDetails extends AppCompatActivity {
                 tradesFile.document().set(finalCountDown);
                 //Return to start and clear Property final result HashMap
                 Property.getInstance().clearRoomResObj();
+                Property.getInstance().setRoomCount(0);
                 startActivity(new Intent(finalDetails.this, LaunchPad.class));
                 Toast.makeText(finalDetails.this,"Success!, Your quote can be viewed online", Toast.LENGTH_SHORT).show();
                 finish();

@@ -24,15 +24,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 public class tradeForTask extends Fragment implements FirebaseCallBack {
-
+    //UI Globals
     ArrayList<String> titles = new ArrayList<>();
     ListView list;
     ArrayAdapter<String> adapter;
-
-    private String taskName;
-    private String taskCost;
+    //Result from child fragments
     private String returnedRes;
-
+    //Fragment Globals
     private FragmentTransaction ftNewTradeFrag;
     private newTradeFragment trade;
     private FragmentTransaction ftTaskByTrade;
@@ -133,7 +131,6 @@ public class tradeForTask extends Fragment implements FirebaseCallBack {
             //Launch a new activity for the create new trade type
             ftNewTradeFrag = getChildFragmentManager().beginTransaction();
             trade = new newTradeFragment();
-            //trade.setRetainInstance(true);
             ftNewTradeFrag.replace(R.id.tradeFrag, trade);
             ftNewTradeFrag.commit();
         });
@@ -142,7 +139,7 @@ public class tradeForTask extends Fragment implements FirebaseCallBack {
     }
 
     public void removeChildFrag(String result){
-        //Removes child fragments
+        //Removes child fragments and find back button presses
         switch (result) {
             case "Success from tasksByTrade":
                 Log.d("Test", "tradeForTask - removeChildFrag, dismiss tasksByTrade");
@@ -159,14 +156,12 @@ public class tradeForTask extends Fragment implements FirebaseCallBack {
         }
     }
 
-    //Set fragment result
+    //Set fragment result to parent
     public void passBackToAct(){
         Bundle result = new Bundle();
         result.putString("returnedFromTFT", "Success");
         getParentFragmentManager().setFragmentResult("resultKeyTFT", result);
     }
-
-
 
     @Override
     public void onCallBack(ArrayList<String> list) {

@@ -49,7 +49,7 @@
                     app:backgroundTint="@null"/>
 
                 <Button
-                    android:text="Sign Out"
+                    android:text="@string/sign_out"
                     android:id="@+id/logOutBtn"
                     style="@style/MyBtn"
                     app:backgroundTint="@null"/>

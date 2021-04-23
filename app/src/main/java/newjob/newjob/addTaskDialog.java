@@ -16,13 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 public class addTaskDialog extends DialogFragment{
-
+    //Trade title for dialog title
     String mString;
-    taskDialogListener listener;
+    //Result listener
+    private taskDialogListener listener;
 
-    /*
-     * Class interface from jobRoomDetails, interfaces are called from the parent activity class
-     */
+    //Class interface from jobRoomDetails, interfaces are called from the parent activity class
     public interface taskDialogListener {
         void onDialogPositiveClick(String taskName, String taskPrice);
         void onDialogNegativeClick(DialogFragment dialog);
@@ -43,6 +42,7 @@ public class addTaskDialog extends DialogFragment{
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         if(getArguments()!= null) {
             mString = getArguments().getString("title");
+            requireActivity().setTitle(mString);
         }
         //Inflate the layout dialog_add_task.xml
         LayoutInflater inflater = requireActivity().getLayoutInflater();
@@ -52,7 +52,6 @@ public class addTaskDialog extends DialogFragment{
          *Test for new task and add trade names, this means that the calling window is jobRoomDetails and this is a new task
          * and it will be assigned to a trade upon creation
          */
-            //addTaskDialog called by jobRoomDetails new task button
             builder.setTitle("Add new task and assign it to a trade");
             builder.setView(view)
                     .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
@@ -61,7 +60,7 @@ public class addTaskDialog extends DialogFragment{
                             //Get text and double from edittext views
                             EditText taskNameEditText = (EditText)view.findViewById(R.id.taskNameEditText);
                             EditText taskCostEditText = (EditText)view.findViewById(R.id.taskCostEditText);
-                            //Validating doesn't provide interface feedback
+                            //TODO find out why validating doesn't provide interface feedback
                             if(taskNameEditText.getText().toString().isEmpty()) {
                                 taskNameEditText.setError("Please enter a Title");
                                 Log.d("Test", "addTaskDialog, edit text boxes empty");

@@ -15,13 +15,12 @@ import android.widget.TextView;
 import com.example.rqcquotes.R;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class editPrice extends Fragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    String title;
-    Double cost;
+    //Globals of retrieved Trade title and cost from parent
+    private String title;
+    private Double cost;
 
     public editPrice() {
         // Required empty public constructor
@@ -46,21 +45,21 @@ public class editPrice extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        //Set Trade title to UI
         TextView titleText = (TextView)view.findViewById(R.id.titleText);
         titleText.setText(title);
-
+        //Set cost before editting
         EditText editCost = (EditText)view.findViewById(R.id.editTextCost);
         String localCost = cost.toString();
         editCost.setText(localCost);
 
         Button saveBtnEditTask = (Button)view.findViewById(R.id.saveBtnEditTask);
         saveBtnEditTask.setOnClickListener(View -> {
+            //Create local HashMap before passing to room HashMap
             HashMap<String, Object>tempMap = new HashMap<>();
             String tempString = editCost.getText().toString();
-            Double tempDouble = Double.parseDouble(tempString);
 
-            //Add task to property
+            //Add task to complete room list
             tempMap.put(title, tempString);
             Property.getInstance().setRoomTasks(tempMap);
 

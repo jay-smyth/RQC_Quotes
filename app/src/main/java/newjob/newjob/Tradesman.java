@@ -37,10 +37,7 @@ public class Tradesman {
     }
     public Tradesman() {}
 
-    /*
-     * Loads data from db and should add all trades titles to a variable, data is loaded async so I need callbacks or I get null at the Array when I need it
-     *
-     */
+    //Loads data from db and add all trades titles to a variable, data is loaded async so I need callbacks or I get null at the Array when I need it
     public void dbTradesToArray(FirebaseCallBack firebaseCallBack){
         ArrayList<String> list = new ArrayList<>();
                 tradesFile.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -55,9 +52,7 @@ public class Tradesman {
                     Log.d("Test", "Tradesman, from db as list: " + list.toString());
                     firebaseCallBack.onCallBack(list);
                 }
-
             }
-
         });
         Log.d("Test","Tradesman, after the onComplete function: " +  list.toString());
     }
@@ -89,6 +84,7 @@ public class Tradesman {
     }
 
     public double getPartsCost(){return partsCost;}
+
     //create each dummy Tradesman and set details to database
     public void addTradeNames(String tTitle){
         Map<String, Object> data = new HashMap<>();
@@ -122,6 +118,7 @@ public class Tradesman {
         d.put("Paint single wall", 65);
         d.put("Gloss and finish woodwork", 265);
     }
+
     //write any new Tradesman objects and update existing ones with new tasks
     public void writeTradeToDB(String title, HashMap<String, Object>taskList){
         tradesFile.document(title).set(taskList, SetOptions.merge());

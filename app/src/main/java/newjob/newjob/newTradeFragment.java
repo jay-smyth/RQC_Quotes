@@ -24,26 +24,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
-/*
- *This class is part of the fragment_new_trade.xml, in this class it will take user data and update the db with a new trade and its first task
- * if applicable.  Zero arguments have been passed but 3 should be returned, a String with a trade title, and a hashmap of a new task and the task cost.
- */
 public class newTradeFragment extends Fragment implements addTaskDialog.taskDialogListener {
-    //connect to firebase Auth and Firestore
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private final String mAuthId = mAuth.getUid();
-    CollectionReference tradesFile = db.collection("users").document(mAuthId).collection("trades");
+    //Initialise Tradesman object for new Trade type
     private final Tradesman newTradeGuy = new Tradesman();
-
-
-    // default vars and args
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
-
     //my vars
     public String tradeTitle;
     public String taskTitle;
@@ -62,10 +47,9 @@ public class newTradeFragment extends Fragment implements addTaskDialog.taskDial
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().setTitle(getString(R.string.newTradeFragTitle));
+        requireActivity().setTitle(getString(R.string.newTradeFragTitle));
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            Log.d("Test", "newTradeFragment, Bundle should be empty");
         }
     }
 
@@ -77,6 +61,7 @@ public class newTradeFragment extends Fragment implements addTaskDialog.taskDial
         View view =  inflater.inflate(R.layout.fragment_new_trade, container, false);
         //Initialise UI components in here with View class object
         Button saveBtn = view.findViewById(R.id.saveBtn);
+        //TODO set cancel and back button functions
         Button canBtn = view.findViewById(R.id.cancelBtn);
         Button addNewTask = view.findViewById(R.id.addTaskBtn);
         EditText newTradeEditText = view.findViewById(R.id.newTradeEditText);
