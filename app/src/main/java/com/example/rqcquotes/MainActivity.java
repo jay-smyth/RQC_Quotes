@@ -25,13 +25,13 @@ public class MainActivity extends AppCompatActivity {
         Button logInBtn = findViewById(R.id.logInSendBtn);
         Button registerBtn = findViewById(R.id.registerBtn);
 
-        //Verify User returns on an associated account
-        if(mAuth.getCurrentUser() != null){
+        //Verify User returns on an associated account - commented out for demo
+        /*if(mAuth.getCurrentUser() != null){
             startActivity(new Intent(MainActivity.this, LaunchPad.class));
             finish();
         } else {
             Toast.makeText(MainActivity.this,"Login Unsuccessful!", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
     //Login button start activity
     logInBtn.setOnClickListener(new View.OnClickListener() {
