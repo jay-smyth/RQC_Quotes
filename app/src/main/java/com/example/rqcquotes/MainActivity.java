@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Button logInBtn = findViewById(R.id.logInSendBtn);
         Button registerBtn = findViewById(R.id.registerBtn);
 
-        //Verify User returns an associated account
+        //Verify User returns on an associated account
         if(mAuth.getCurrentUser() != null){
             startActivity(new Intent(MainActivity.this, LaunchPad.class));
             finish();
